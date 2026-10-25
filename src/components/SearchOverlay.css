@@ -1,0 +1,140 @@
+.search {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+}
+.search.is-open {
+  pointer-events: auto;
+}
+.search__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+  cursor: default;
+}
+.search.is-open .search__scrim {
+  opacity: 1;
+}
+.search__panel {
+  position: relative;
+  max-height: 100dvh;
+  overflow-y: auto;
+  padding-bottom: 40px;
+  background: var(--c-obsidian);
+  border-bottom: 1px solid var(--c-line);
+  transform: translateY(-16px);
+  opacity: 0;
+  transition:
+    transform var(--dur) var(--ease-out),
+    opacity var(--dur) var(--ease-out);
+}
+.search.is-open .search__panel {
+  transform: none;
+  opacity: 1;
+}
+.search__panel[hidden] {
+  display: block;
+  visibility: hidden;
+}
+.search__form {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 112px;
+  border-bottom: 1px solid var(--c-line);
+}
+.search__input {
+  flex: 1;
+  min-width: 0;
+  padding: 18px 0;
+  background: none;
+  border: 0;
+  font-family: var(--font-display);
+  font-size: var(--t-display);
+  letter-spacing: var(--track-display);
+  line-height: 1;
+}
+.search__input::placeholder {
+  color: var(--c-ash);
+}
+.search__input:focus {
+  outline: none;
+}
+.search__input::-webkit-search-cancel-button {
+  display: none;
+}
+.search__body {
+  display: grid;
+  gap: 18px;
+  padding-top: 24px;
+}
+.search__suggest ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.search__chip {
+  min-height: 36px;
+  padding-inline: 10px;
+  font-size: 0.8125rem;
+  transition:
+    border-color var(--dur-fast) ease,
+    color var(--dur-fast) ease;
+}
+.search__chip:hover {
+  border-color: var(--c-ink);
+}
+.search__results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  border-top: 1px solid var(--c-line);
+  border-left: 1px solid var(--c-line);
+}
+.search__results > li {
+  border-right: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--c-line);
+}
+.search__result {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 14px;
+  align-items: center;
+  height: 100%;
+  padding: 14px;
+  background: var(--c-obsidian);
+  transition: background-color var(--dur-fast) ease;
+}
+.search__result:hover,
+.search__result:focus-visible {
+  background: var(--c-graphite-2);
+}
+.search__thumb {
+  grid-row: span 2;
+  width: 56px;
+  height: 84px;
+}
+.search__name {
+  align-self: end;
+  font-family: var(--font-display);
+  font-size: var(--t-sub);
+  letter-spacing: var(--track-sub);
+}
+.search__empty {
+  display: grid;
+  gap: 16px;
+}
+
+/* Fechado, o painel sai da página de fato (sem interceptar cliques nem leitores de tela). */
+.search {
+  visibility: hidden;
+  transition: visibility 0s linear var(--dur);
+}
+.search.is-open {
+  visibility: visible;
+  transition-delay: 0s;
+}

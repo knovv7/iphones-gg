@@ -1,0 +1,403 @@
+/* ---------------------------------------------------------------- reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+body {
+  margin: 0;
+  background: var(--c-obsidian);
+  color: var(--c-ink);
+  font-family: var(--font-text);
+  font-size: var(--t-body);
+  font-weight: 400;
+  line-height: 1.5;
+  font-feature-settings: 'ss01' 0, 'cv11' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+  margin: 0;
+}
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-wrap: balance;
+}
+p {
+  max-width: 72ch;
+  text-wrap: pretty;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+::selection {
+  background: var(--c-red);
+  color: #fff;
+}
+:focus-visible {
+  outline: 2px solid var(--c-red-bright);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link {
+  position: fixed;
+  left: var(--gutter);
+  top: 8px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--c-ink);
+  color: #000;
+  border-radius: var(--r-ui);
+  transform: translateY(-160%);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.skip-link:focus {
+  transform: none;
+}
+
+/* ---------------------------------------------------------------- layout */
+.wrap {
+  width: 100%;
+  padding-inline: var(--gutter);
+}
+.section {
+  padding-block: var(--section-gap) 0;
+}
+.hairline-top {
+  border-top: 1px solid var(--c-line);
+}
+
+/* ---------------------------------------------------------------- tipografia */
+.t-display-xl {
+  font-family: var(--font-display);
+  font-size: var(--t-display-xl);
+  line-height: 0.9;
+  letter-spacing: var(--track-xl);
+}
+.t-display {
+  font-family: var(--font-display);
+  font-size: var(--t-display);
+  line-height: 1;
+  letter-spacing: var(--track-display);
+}
+.t-h-lg {
+  font-family: var(--font-display);
+  font-size: var(--t-h-lg);
+  line-height: 1.05;
+  letter-spacing: var(--track-h);
+}
+.t-h {
+  font-family: var(--font-display);
+  font-size: var(--t-h);
+  line-height: 1.15;
+  letter-spacing: var(--track-h);
+}
+p.t-sub {
+  max-width: 60ch;
+}
+.t-sub {
+  font-size: var(--t-sub);
+  line-height: 1.35;
+  letter-spacing: var(--track-sub);
+}
+.t-caption {
+  font-size: var(--t-caption);
+  line-height: 1.43;
+}
+.t-muted {
+  color: var(--c-ink-2);
+}
+.t-faint {
+  color: var(--c-ink-3);
+}
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------- texto que rola (hover) */
+.roll {
+  display: inline-grid;
+  overflow: hidden;
+  vertical-align: top;
+  line-height: inherit;
+}
+.roll > span {
+  grid-area: 1 / 1;
+  transition: transform var(--dur) var(--ease-out);
+}
+.roll > span + span {
+  transform: translateY(105%);
+}
+.roll-host:hover .roll > span:first-child,
+.roll-host:focus-visible .roll > span:first-child {
+  transform: translateY(-105%);
+}
+.roll-host:hover .roll > span + span,
+.roll-host:focus-visible .roll > span + span {
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------------- botões */
+.btn {
+  --btn-h: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: var(--btn-h);
+  padding: 0 20px;
+  border-radius: var(--r-ui);
+  border: 1px solid transparent;
+  font-size: var(--t-caption);
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    transform var(--dur-fast) var(--ease-out);
+}
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+.btn--primary {
+  background: var(--c-red);
+  color: #fff;
+}
+.btn--primary:hover:not(:disabled) {
+  background: var(--c-red-press);
+}
+.btn--ghost {
+  border-color: var(--c-line-strong);
+  color: var(--c-ink);
+}
+.btn--ghost:hover:not(:disabled) {
+  border-color: var(--c-ink);
+}
+.btn--sm {
+  --btn-h: 38px;
+  padding: 0 14px;
+  font-size: var(--t-caption);
+}
+.btn--block {
+  width: 100%;
+}
+.link {
+  text-decoration: underline;
+  text-decoration-color: var(--c-ash);
+  text-underline-offset: 0.22em;
+  transition: text-decoration-color var(--dur-fast) ease;
+}
+.link:hover {
+  text-decoration-color: currentColor;
+}
+
+/* ---------------------------------------------------------------- pílula fantasma */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 6px 4px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--r-ui);
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pill--red {
+  border-color: var(--c-red-bright);
+  color: var(--c-red-bright);
+}
+.pill--muted {
+  border-color: var(--c-ash);
+  color: var(--c-ink-2);
+}
+
+/* ---------------------------------------------------------------- disponibilidade */
+.stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--t-caption);
+  color: var(--c-ink-2);
+}
+.stock::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-ink-2);
+}
+.stock--in-stock::before {
+  background: var(--c-ink);
+}
+.stock--low {
+  color: var(--c-ink);
+}
+.stock--low::before {
+  background: var(--c-red-bright);
+}
+.stock--out {
+  color: var(--c-ink-3);
+}
+.stock--out::before {
+  background: transparent;
+  border: 1px solid var(--c-ash);
+}
+
+/* ---------------------------------------------------------------- campos */
+.field {
+  display: grid;
+  gap: 8px;
+}
+.field__label {
+  font-size: var(--t-caption);
+  color: var(--c-ink-2);
+}
+.input,
+.select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  background: var(--c-graphite-1);
+  border: 1px solid var(--c-ash);
+  border-radius: var(--r-ui);
+  transition: border-color var(--dur-fast) ease;
+}
+.input:hover,
+.select:hover {
+  border-color: var(--c-ink-3);
+}
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--c-ink);
+}
+.input[aria-invalid='true'] {
+  border-color: var(--c-red-bright);
+}
+.field__error {
+  font-size: var(--t-caption);
+  color: var(--c-red-bright);
+}
+.select {
+  appearance: none;
+  padding-right: 36px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--c-ink) 50%),
+    linear-gradient(135deg, var(--c-ink) 50%, transparent 50%);
+  background-position:
+    calc(100% - 19px) 50%,
+    calc(100% - 14px) 50%;
+  background-size:
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* ---------------------------------------------------------------- aviso demonstrativo */
+.demo-note {
+  max-width: 72ch;
+  font-size: var(--t-caption);
+  color: var(--c-ink-3);
+  line-height: 1.5;
+}
+.demo-note strong {
+  font-weight: 400;
+  color: var(--c-ink-2);
+}
+
+/* ---------------------------------------------------------------- entrada ao rolar */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+/* Sem script, nada fica escondido. */
+.no-js .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

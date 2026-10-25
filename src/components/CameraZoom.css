@@ -1,0 +1,132 @@
+/* Seção alta: o palco (uma tela) fica preso enquanto se rola mais 1,75 tela. */
+.cam {
+  --pin: 175svh;
+  position: relative;
+  height: calc(100svh - var(--header-h) + var(--pin));
+  margin-top: var(--section-gap);
+}
+.cam__stage {
+  position: sticky;
+  top: var(--header-h);
+  height: calc(100svh - var(--header-h));
+  overflow: hidden;
+}
+
+.cam__head {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: end;
+  gap: 16px var(--gutter);
+  padding-top: clamp(20px, 4svh, 48px);
+  will-change: opacity, transform;
+}
+.cam__head p {
+  max-width: 46ch;
+}
+
+/* Tamanho e posição vêm do script (close → aparelho inteiro). */
+.cam__phone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  transform-origin: 0 0;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ---------------- números: laterais no desktop, faixa embaixo no celular */
+.cam__facts {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-content: center;
+  row-gap: 48px;
+  pointer-events: none;
+}
+.cam__fact {
+  display: grid;
+  gap: 8px;
+  max-width: 17rem;
+  padding-top: 14px;
+  border-top: 1px solid var(--c-line);
+  will-change: opacity, transform;
+}
+.cam.is-live .cam__fact {
+  opacity: 0;
+}
+.cam__fact--0 {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: center;
+  justify-self: start;
+}
+.cam__fact--1,
+.cam__fact--2 {
+  grid-column: 2;
+  justify-self: end;
+  width: 17rem;
+}
+.cam__num {
+  font-family: var(--font-display);
+  font-size: var(--t-figure);
+  line-height: 0.9;
+  letter-spacing: var(--track-xl);
+}
+
+@media (max-width: 1023px) {
+  .cam__head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cam__facts {
+    inset: auto 0 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto;
+    gap: 16px;
+    padding-bottom: 20px;
+  }
+  .cam__fact--0,
+  .cam__fact--1,
+  .cam__fact--2 {
+    grid-column: auto;
+    grid-row: auto;
+    justify-self: stretch;
+    width: auto;
+    max-width: none;
+  }
+  .cam__num {
+    font-size: clamp(1.875rem, 8.5vw, 3rem);
+  }
+}
+
+/* Movimento reduzido: sem prender nem animar — o aparelho já aparece inteiro. */
+@media (prefers-reduced-motion: reduce) {
+  .cam {
+    height: auto;
+  }
+  .cam__stage {
+    position: relative;
+    top: auto;
+    height: auto;
+    overflow: visible;
+    display: grid;
+    gap: 32px;
+  }
+  .cam__phone {
+    position: static;
+    display: block;
+    width: auto;
+    height: min(72svh, 680px);
+    margin-inline: auto;
+    transform: none;
+  }
+  .cam__facts {
+    position: static;
+    inset: auto;
+  }
+}

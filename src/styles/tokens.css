@@ -1,0 +1,66 @@
+/*
+ * Tokens — linguagem do Minimal Collective (DESIGN.md) adaptada à loja:
+ * fundo obsidiana, linhas finas, uma só espessura de fonte (400), hierarquia por escala
+ * e tracking negativo. O vermelho é o único acento e aparece pouco.
+ */
+:root {
+  /* Superfícies */
+  --c-obsidian: #000000;
+  --c-graphite-1: #0a0a0a;
+  --c-graphite-2: #121212;
+  --c-graphite-3: #1b1b1b;
+  --c-ash: #5a5a5a;
+
+  /* Texto */
+  --c-ink: #f2f1ee; /* branco suave */
+  --c-ink-2: #a6a6a3; /* descrições */
+  --c-ink-3: #7c7c79; /* notas */
+
+  /* Linhas */
+  --c-line: rgba(242, 241, 238, 0.14);
+  --c-line-strong: rgba(242, 241, 238, 0.55);
+
+  /* Acento */
+  --c-red: #e11d2a; /* preenchimentos (texto branco 4,7:1) */
+  --c-red-bright: #ff4d57; /* texto e indicadores sobre preto */
+  --c-red-press: #c4141f;
+
+  /* Tipografia — uma família, peso 400 */
+  --font-display: 'Inter Tight Variable', 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, sans-serif;
+  --font-text: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --t-caption: 0.875rem; /* 14 */
+  --t-body: 1rem; /* 16 */
+  --t-sub: 1.125rem; /* 18 */
+  --t-h-sm: 1.4375rem; /* 23 */
+  --t-h: clamp(1.4375rem, 1.1rem + 0.9vw, 1.6875rem); /* 23 → 27 */
+  --t-h-lg: clamp(1.6875rem, 1.2rem + 1.2vw, 2rem); /* 27 → 32 */
+  --t-display: clamp(2.25rem, 1.2rem + 3.4vw, 3.5rem); /* 36 → 56 */
+  --t-display-xl: clamp(3rem, 0.6rem + 7.4vw, 7.25rem); /* 48 → 116 */
+  --t-figure: clamp(3rem, 1.6rem + 3.8vw, 4.8125rem); /* 48 → 77, números de destaque */
+  --t-giant: clamp(3.5rem, 0.6rem + 8.6vw, 9.5rem); /* manchetes de campanha */
+
+  --track-xl: -0.056em;
+  --track-display: -0.044em;
+  --track-h: -0.032em;
+  --track-sub: -0.02em;
+
+  /* Espaço */
+  --gutter: clamp(16px, 2.4vw, 36px);
+  --section-gap: clamp(104px, 11vw, 173px);
+  --gap: 14px;
+  --header-h: 60px;
+
+  /* Forma */
+  --r-ui: 4.5px;
+
+  /* Movimento */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur: 420ms;
+  --dur-slow: 800ms;
+
+  color-scheme: dark;
+}
